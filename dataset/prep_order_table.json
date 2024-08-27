@@ -1,0 +1,16 @@
+{
+	"name": "prep_order_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "prep",
+			"table": "order_ptable"
+		}
+	}
+}

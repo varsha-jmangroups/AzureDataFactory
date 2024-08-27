@@ -19,15 +19,23 @@
 					"name": "source2"
 				}
 			],
-			"sinks": [],
-			"transformations": [
+			"sinks": [
 				{
-					"name": "sort1"
+					"dataset": {
+						"referenceName": "prep_customer_table",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
 				},
 				{
-					"name": "sort2"
+					"dataset": {
+						"referenceName": "prep_order_table",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
 				}
 			],
+			"transformations": [],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -37,8 +45,26 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source2",
-				"source1 sort(asc(ERROR_FUNCTION(''), true)) ~> sort1",
-				"source2 sort(asc(ERROR_FUNCTION(''), true)) ~> sort2"
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"source2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
 			]
 		}
 	}
