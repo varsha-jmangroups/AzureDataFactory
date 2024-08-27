@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "prep",
-			"table": "customer.ptable"
+			"table": "customer"
 		}
 	}
 }
